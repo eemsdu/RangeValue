@@ -1,0 +1,20 @@
+﻿@model double
+
+@{
+    ViewData["Title"] = "Calculate Score";
+}
+
+<h1>Calculate Score</h1>
+
+<form method="post" action="/User/CalculateScore">
+    <div class="form-group">
+        <label for="number">Enter a number:</label>
+        <input type="number" step="any" class="form-control" name="number" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Calculate Score</button>
+</form>
+
+@if (ViewBag.Score != null && !string.IsNullOrEmpty(ViewBag.Score.ToString()))
+{
+    <h2>@ViewBag.Score</h2>
+}

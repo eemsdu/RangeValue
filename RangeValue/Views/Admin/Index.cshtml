@@ -1,0 +1,90 @@
+﻿@model RangeViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Case</h1>
+   
+    <button id="button_add_range" onclick="clickedAddRange()">Yeni Aralık Eklemek İçin Tıklayınız</button>
+    <div id="ask_range" style="display:none">
+        <form asp-action="AddToList" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group row">
+                <label for="FirstNumber" class="col-sm-2 col-form-label">First Number</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="FirstNumber" name="FirstNumber" placeholder="Enter a number" value="@Model.FirstNumber" />
+                    <span asp-validation-for="FirstNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="Operator" class="col-sm-2 col-form-label">Operator</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="Operator" name="FirstOperand" asp-for="FirstOperand">
+                        <option value="<">&lt;</option>
+                        <option value="<=">&le;</option>
+                        <option value=">">&gt;</option>
+                        <option value=">=">&ge;</option>
+                    </select>
+                    <span asp-validation-for="FirstOperand" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="SecondNumber" class="col-sm-2 col-form-label">Second Number</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="SecondNumber" name="SecondNumber" placeholder="Enter a number" value="@Model.SecondNumber" />
+                    <span asp-validation-for="SecondNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="C1Operator" class="col-sm-2 col-form-label">Operator</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="C1Operator" name="SecondOperand" asp-for="SecondOperand">
+                        <option value="<">&lt;</option>
+                        <option value="<=">&le;</option>
+                        <option value=">">&gt;</option>
+                        <option value=">=">&ge;</option>
+                    </select>
+                    <span asp-validation-for="SecondOperand" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="Score" class="col-sm-2 col-form-label">Score</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="Score" name="Score" placeholder="Enter a score" value="@Model.Score" />
+                    <span asp-validation-for="Score" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+         
+        </form>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+
+        @if (Model.Errors != null && Model.Errors.Any())
+        {
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (var error in Model.Errors)
+                    {
+                        <li>@error</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function clickedAddRange() {
+        var askRange = document.getElementById("ask_range")
+        askRange.style.display = "block"
+    }
+</script>
